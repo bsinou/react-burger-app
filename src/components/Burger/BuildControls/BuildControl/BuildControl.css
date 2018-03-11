@@ -1,6 +1,6 @@
 .BuildControl {
     display: flex;
-    flex-flow: column-reverse;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
     margin: 5px 0;
