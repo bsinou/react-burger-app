@@ -1,30 +1,34 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 
-import Aux from '../../../hoc/Aux'
+import Aux from '../../../hoc/Aux/Aux'
 import Button from '../../UI/Button/Button'
 
-const orderSummary = (props) => {
+class OrderSummary extends Component {
+    
+    // componentWillUpdate(){
+    //     console.log('[OrderSummary] will update');
+    // }
+    
+    render() {
+        const ingredientSummary = Object.keys(this.props.ingredients)
+            .map(key => <li key={key}>
+                <span style={{ textTransform: 'capitilize' }}>{key}
+                </span>: {this.props.ingredients[key]}</li>);
+        return (
+            <Aux>
+                <h3>Your Ordered</h3>
+                <p>A delicious burger with following ingredients:</p>
+                <ul>
+                    {ingredientSummary}
+                </ul>
+                <p><strong>Total price: USD {this.props.price.toFixed(2)}</strong></p>
+                <p> Continue to checkout?</p>
+                <Button btnType="Danger" clicked={this.props.purchaseCancelled}>CANCEL</Button>
+                <Button btnType="Success" clicked={this.props.purchaseContinued}>CONTINUE</Button>
+            </Aux>
+        );
+    }
+}
 
-    const ingredientSummary = Object.keys(props.ingredients)
-        .map( key => <li key={key}>
-            <span style={{ textTransform: 'capitilize' }}>{key}
-            </span>: {props.ingredients[key]}</li>);
-
-    return (
-        <Aux> 
-            <h3>Your Ordered</h3>
-            <p>A delicious burger with following ingredients:</p>
-            <ul>
-                {ingredientSummary}
-            </ul>
-            <p><strong>Total price: USD {props.price.toFixed(2)}</strong></p>
-            <p> Continue to checkout?</p>
-            <Button btnType="Danger" clicked={props.purchaseCancelled}>CANCEL</Button>
-            <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
-        </Aux>
-    );
-
-};
-
-export default orderSummary;   
+export default OrderSummary;   
